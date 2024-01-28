@@ -12,12 +12,14 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: JSX.Element;
 }>) {
   return (
     <html lang="en">
       <link rel="icon" href="/logo.png" sizes="any" />
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+      </body>
     </html>
   );
 }

@@ -14,10 +14,10 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
-    const { id, name, password, email } = await request.json();
+    const { name, telp, password, email, alamat } = await request.json();
     const updateUsers = await query({
-      query: "INSERT INTO users (id, name, password, email) VALUES (?, ?, ?, ?)",
-      values: [name, password, email],
+      query: "INSERT INTO users (name, telp, password, email, alamat) VALUES (?, ?, ?, ?, ?)",
+      values: [name, telp, password, email, alamat],
     });
     const result = updateUsers.affectedRows;
     let message = "";
@@ -27,10 +27,11 @@ export async function POST(request) {
       message = "error";
     }
     const user = {
-      id: id,
       name: name,
+      telp: telp,
       password: password,
-      email: email
+      email: email,
+      alamat: alamat
     };
     return new Response(JSON.stringify({
       message: message,
@@ -47,10 +48,10 @@ export async function POST(request) {
 
 export async function PUT(request) {
   try {
-    const { id, name, password } = await request.json();
+    const { id, name, telp, password, email, alamat } = await request.json();
     const updateUsers = await query({
-      query: "UPDATE users SET name = ?, password = ? WHERE id = ?",
-      values: [name, password, id],
+      query: "UPDATE users SET name = ?, telp = ?, password = ?, email = ?, alamat = ? WHERE id = ?",
+      values: [name, telp, password, email, alamat, id],
     });
     const result = updateUsers.affectedRows;
     let message = "";
@@ -62,7 +63,10 @@ export async function PUT(request) {
     const user = {
       id: id,
       name: name,
-      password: password
+      telp: telp,
+      password: password,
+      email: email,
+      alamat: alamat
     };
     return new Response(JSON.stringify({
       message: message,

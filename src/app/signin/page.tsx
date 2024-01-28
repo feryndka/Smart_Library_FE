@@ -90,7 +90,7 @@ export default function Home() {
                     router.push("/signup");
                   }}
                 >
-                  Start a 14 day free trial
+                  Register
                 </span>
               </p>
             </div>
