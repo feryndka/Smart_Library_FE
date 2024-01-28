@@ -1,5 +1,4 @@
-import React from "react";
-import UserLayout from "@/components/layout/userLayout";
+import UserLayout from "../../components/layout/UserLayout";
 
 export default function layout({ children }) {
   return <UserLayout>{children}</UserLayout>;

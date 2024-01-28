@@ -1,9 +1,10 @@
+"use client";
 import { useMemo, useEffect, useState } from "react";
 import {
   MaterialReactTable,
   useMaterialReactTable,
 } from "material-react-table";
-import { getUsers } from "@/client/usersClient";
+import { getUsers } from "../../../client/usersClient";
 
 //nested data is ok, see accessorKeys in ColumnDef below
 // const data = [
