@@ -12,6 +12,6 @@ export const updateUsers = (body) => {
   return client.put("/api/users", body)
 }
 
-export const deleteUser = (body) => {
-  return client.put("/api/users", body)
+export const deleteUsers = (body) => {
+  return client.delete("/api/users", body)
 }

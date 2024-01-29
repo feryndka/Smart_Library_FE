@@ -12,22 +12,16 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Collapse } from "@mui/material";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-// import Image from "next/image";
-// import logo from "./logo.png";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
-import QueryStatsIcon from "@mui/icons-material/QueryStats";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import WorkIcon from "@mui/icons-material/Work";
 import SettingsIcon from "@mui/icons-material/Settings";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import HelpIcon from "@mui/icons-material/Help";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import RecommendIcon from "@mui/icons-material/Recommend";
@@ -344,7 +338,7 @@ function UserLayout(props) {
             textAlign: "center",
           }}
         >
-          Copyright © 2023 Sistem Informasi Perpustakaan. All Rights Reserved.
+          Copyright © 2024 Sistem Informasi Perpustakaan. All Rights Reserved.
         </Typography>
       </Box>
     </Box>

@@ -2,7 +2,6 @@ import axios from "axios";
 import queryString from "query-string";
 
 const client = axios.create({
-  
   headers: {
     Accept: "application/json"
   }
