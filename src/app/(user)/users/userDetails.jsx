@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -9,9 +9,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Button from "@mui/material/Button";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { postUsers } from "../../../client/usersClient";
+import { postUsers, updateUsers } from "../../../client/usersClient";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 // Form validation using yup and react form hook
 const schema = yup
@@ -24,41 +25,96 @@ const schema = yup
   })
   .required();
 
-export default function UserDetails() {
-  const [type, setType] = useState("User");
+export default function UserDetails({ handleAddUserClose, rows }) {
+  const [utype, setUType] = useState("User");
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = async (data) => {
-    console.log("Data", data);
-    const response = await postUsers(data);
-    console.log("Response =>", response.data);
 
-    // React Toastify
-    toast.success("Success!", {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
+  useEffect(() => {
+    if (rows) {
+      setUType(rows.type);
+      reset({
+        id: rows.id,
+        name: rows.name,
+        telp: rows.telp,
+        password: rows.password,
+        email: rows.email,
+        alamat: rows.alamat,
+      });
+    }
+  }, []);
+
+  const onSubmit = async (data) => {
+    try {
+      Object.assign(data, { type: utype });
+      console.log("Data =>", data);
+      if (rows) {
+        const response = await updateUsers(data);
+        console.log("Response =>", response.data);
+        // React Toastify
+        toast.success("Data updated!", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        handleAddUserClose();
+      } else {
+        const response = await postUsers(data);
+        console.log("Response =>", response.data);
+        // React Toastify
+        toast.success("Success!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        handleAddUserClose();
+      }
+    } catch (err) {
+      console.log("Error ", err);
+      // React Toastify
+      toast.error("Error!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
 
   const handleChange = (event) => {
-    setType(event.target.value);
+    setUType(event.target.value);
   };
 
   return (
     <>
-      <ToastContainer />
+      <div className="flex justify-start">
+        <ArrowBackIcon
+          className="cursor-pointer mr-2"
+          onClick={() => handleAddUserClose()}
+        />
+        <h2 className="font-bold mb-4">Add User</h2>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid sm:grid-cols-1 md:grid-cols-6 gap-5">
           <div>
@@ -113,7 +169,7 @@ export default function UserDetails() {
               <InputLabel>Type</InputLabel>
               <Select
                 size="small"
-                value={type}
+                value={utype}
                 label="Type"
                 onChange={handleChange}
               >

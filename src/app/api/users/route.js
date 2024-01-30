@@ -49,10 +49,10 @@ export async function POST(request) {
 
 export async function PUT(request) {
   try {
-    const { id, name, telp, password, email, alamat } = await request.json();
+    const { id, name, telp, password, email, alamat, type } = await request.json();
     const updateUsers = await query({
-      query: "UPDATE users SET name = ?, telp = ?, password = ?, email = ?, alamat = ? WHERE id = ?",
-      values: [name, telp, password, email, alamat, id],
+      query: "UPDATE users SET name = ?, telp = ?, password = ?, email = ?, alamat = ?, type = ? WHERE id = ?",
+      values: [name, telp, password, email, alamat, type, id],
     });
     const result = updateUsers.affectedRows;
     let message = "";
@@ -67,7 +67,8 @@ export async function PUT(request) {
       telp: telp,
       password: password,
       email: email,
-      alamat: alamat
+      alamat: alamat,
+      type: type
     };
     return new Response(JSON.stringify({
       message: message,
@@ -90,18 +91,13 @@ export async function DELETE(request) {
       values: [id],
     });
     const result = deleteUser.affectedRows;
-    let message = "";
-    if (result) {
-      message = "success";
-    } else {
-      message = "error";
-    }
+    let message = result ? "success" : "error";
     const user = {
       id: id,
     };
     return new Response(JSON.stringify({
       message: message,
-      status: 200,
+      status: result ? 200 : 404,
       user: user
     }));
   } catch (error) {
