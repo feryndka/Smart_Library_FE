@@ -32,6 +32,7 @@ import BookIcon from "@mui/icons-material/Book";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import ImportContactsOutlinedIcon from "@mui/icons-material/ImportContactsOutlined";
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
 
 const drawerWidth = 240;
 
@@ -76,65 +77,49 @@ function UserLayout(props) {
         <div>
           <List>
             {[
-              {
-                title: "Dashboard",
-                href: "/",
-              },
-              {
-                title: "Users",
-                href: "/users",
-              },
-              {
-                title: "Books",
-                href: "/books",
-              },
-              {
-                title: "Peminjaman Buku",
-                href: "/projects",
-              },
-              {
-                title: "Pengembalian & Perpanjang",
-                href: "/message",
-              },
-              {
-                title: "Location Books",
-                href: "/settings",
-              },
+              "Dashboard",
+              "Analytics",
+              "Users",
+              "Books",
+              "Peminjaman",
+              "Pengembalian",
+              "Location",
             ].map((item, index) => (
               <ListItem
                 key={index}
                 disablePadding
                 className={
-                  pathname === item.href
+                  pathname.startsWith("/" + item.toLocaleLowerCase())
                     ? "text-sky-600 bg-slate-100"
                     : "text-slate-700"
                 }
                 onClick={() => {
-                  router.push(item.href);
+                  router.push("/" + item.toLocaleLowerCase());
                 }}
               >
                 <ListItemButton
                   className={
-                    pathname === item.href
+                    pathname.startsWith("/" + item.toLocaleLowerCase())
                       ? "text-sky-600 hover:bg-slate-100"
                       : "text-slate-700"
                   }
                 >
                   <ListItemIcon
                     className={
-                      pathname === item.href
+                      pathname.startsWith("/" + item.toLocaleLowerCase())
                         ? "text-sky-600 bg-slate-100"
                         : "text-slate-700"
                     }
                   >
                     {index === 0 && <SpaceDashboardIcon />}
-                    {index === 1 && <PeopleAltIcon />}
-                    {index === 2 && <BookIcon />}
-                    {index === 3 && <BookmarkBorderIcon />}
-                    {index === 4 && <ImportContactsOutlinedIcon />}
-                    {index === 5 && <LocationOnIcon />}
+                    {index === 1 && <QueryStatsIcon />}
+                    {index === 2 && <PeopleAltIcon />}
+                    {index === 3 && <BookIcon />}
+                    {index === 4 && <BookmarkBorderIcon />}
+                    {index === 5 && <ImportContactsOutlinedIcon />}
+                    {index === 6 && <LocationOnIcon />}
                   </ListItemIcon>
-                  <ListItemText primary={item.title} />
+                  <ListItemText primary={item} />
                 </ListItemButton>
               </ListItem>
             ))}
@@ -326,7 +311,7 @@ function UserLayout(props) {
         <main>{children}</main>
       </Box>
       <Box
-        className="!h-[64px] !bg-[#0C2340] !fixed !bottom-0 !right-0 sm:!flex !hidden !justify-center !items-center !overflow-hidden"
+        className="!h-[40px] !bg-[#0C2340] !fixed !bottom-0 !right-0 sm:!flex !hidden !justify-center !items-center !overflow-hidden"
         sx={{ width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Typography
