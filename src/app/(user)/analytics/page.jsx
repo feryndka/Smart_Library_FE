@@ -21,7 +21,9 @@ const BarChart = dynamic(() => import("./charts/barChart"), {
 export default function Analytics() {
   return (
     <>
-      <div className="text-lg mb-3">Analytics</div>
+      <h1 className="text-[36px] font-bold text-center mb-4">
+        Analytics
+      </h1>
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-5 rounded-lg shadow-lg px-4 py-4 bg-white">
           <PieChart />
