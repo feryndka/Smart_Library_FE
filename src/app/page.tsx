@@ -1,10 +1,8 @@
 "use client";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import LoginIcon from "@mui/icons-material/Login";
 import Switch from "@mui/material/Switch";
-
 import { styled } from "@mui/material/styles";
 
 export default function Home() {
@@ -74,12 +72,6 @@ export default function Home() {
   return (
     <>
       <div style={{ position: "fixed", top: 16, right: 16 }}>
-        {/* <Switch
-          checked={checked}
-          onChange={handleChange}
-          inputProps={{ "aria-label": "controlled" }}
-        /> */}
-
         <MaterialUISwitch sx={{ m: 1 }} checked={checked} onChange={handleChange}/>
       </div>
       <div className="flex justify-center mt-16">
